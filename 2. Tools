@@ -1,0 +1,67 @@
+# 2. Tools
+
+## Burp Suite
+
+### Built-In Browser
+Automatically stores requests without the intercept button being activated
+
+### Other Browsers
+Foxy Proxy
+* Easy switch on and off for using a proxy
+
+### Proxy
+"Intercept is On"
+* Captures traffic before forwarding to browser 
+"Intercept is Off"
+* Will still capture requests sent in the "HTTP History" tab 
+#### Options Tab
+* Can edit the port which Burp is bound to 
+* Match and Replace – modify requests and responses based on enabled rules 
+> Can be used to mimic mobile devices by modifying the request header 
+
+### Intruder
+* Used to modify responses to the website (I.e. use wordlists to test username and password requests in a POST request).  
+* Can use this tool to manipulate any request with input data. 
+* Using the § character (one to start, and another to end) 
+> Burp will automatically add this when sending a request from Intercept 
+* Capture requests using Proxy/Intercept, then right-click and "Send to Intruder" 
+#### Payloads Tab
+* Can upload wordlists to use as the payload (I.e. password list)
+
+* After starting the attack, pay attention the length of the response. This will show a difference and you can find anomalies 
+
+### Repeater
+* Used to capture and modify your web requests and view the responses on the right side 
+* Deconding Text 
+> Ctrl+Shift+U 
+
+## nmap
+Usage
+```bash
+sudo nmap -p80 -sV 192.168.1.15
+```
+
+### nmap Scripts
+Location
+```bash
+/usr/share/nmap/scripts 
+```
+Show all HTTP Nmap Scripts 
+```bash
+ls –lsaht /usr/share/nmap/scripts |grep -I 'http' 
+```
+Running scripts 
+```bash
+nmap –p80 –script=http-enum 172.16.80.1 
+```
+Running scripts with different arguments 
+* Http-methods – use to check which methods are allowed on particular directories 
+```bash
+nmap –p80 --script=http-methods --script-args http-methods.url-path='/wp-includes/' 192.168.1.5 
+```
+Specially Selected NSE Scripts 
+```bash
+--script=http-methods,http-ls,http-robots.txt,http-cookie-flags,http-cors 
+```
+
+## Wordlists
